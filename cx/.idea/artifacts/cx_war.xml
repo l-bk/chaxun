@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cx:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="xince.war">
+      <element id="artifact" artifact-name="cx:war exploded" />
+    </root>
+  </artifact>
+</component>

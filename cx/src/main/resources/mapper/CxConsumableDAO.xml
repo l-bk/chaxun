@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="cx.consumable.dao.CxConsumableDao">
+
+    <sql id="selectAll">
+        a.con_id AS "conId",
+        a.con_brand AS "conBrand",
+        a.con_compatible AS "conCompatible",
+        a.con_code AS "conCode",
+        a.con_model AS "conModel",
+        a.con_details AS  "conDetails",
+        a.con_num AS "conNum",
+        a.con_reference_price AS "conReferencePrice"
+    </sql>
+
+    <select id="findList" resultType="cx.consumable.entity.CxConsumable" parameterType="cx.consumable.entity.CxConsumable">
+        select
+        <include refid="selectAll"/>
+        from cx_consumable_info AS a
+        where 1=1
+        <if test="conModel != null and conModel != ''">
+            and a.con_model = #{conModel}
+        </if>
+        <if test="conCompatible != null and conCompatible !=''">
+            and a.con_compatible like CONCAT('%',#{conCompatible},'%')
+        </if>
+    </select>
+
+
+</mapper>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/xince.iml" filepath="$PROJECT_DIR$/xince.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cx.iml" filepath="$PROJECT_DIR$/cx.iml" />
     </modules>
   </component>
 </project>

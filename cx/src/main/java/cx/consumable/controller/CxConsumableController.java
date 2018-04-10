@@ -30,11 +30,32 @@ public class CxConsumableController {
             result.setObj(list.getList());
             result.setTotal(list.getTotal());
             result.setSuccess(true);
+            result.setLastPage(list.isIsLastPage());
+
+
 
         }catch(Exception e){
             result.setSuccess(false);
             result.setMsg("查询失败");
         }
         return result;
+    }
+
+
+    @RequestMapping(value="/getDetails.do",produces = "application/json",method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxJSON getDetails(@RequestParam Map<String,Object> map,@RequestBody AjaxJSON json){
+        AjaxJSON result = new AjaxJSON();
+        try{
+            CxConsumable cxConsumable = (CxConsumable)JSONObject.toBean(JSONObject.fromObject(json.getObj()),CxConsumable.class);
+            CxConsumable newCon = cxConsumableService.getDetails(cxConsumable.getConId());
+            result.setSuccess(true);
+            result.setObj(newCon);
+        }catch(Exception e){
+            result.setSuccess(false);
+            result.setMsg("查询失败");
+        }
+        return  result;
+
     }
 }

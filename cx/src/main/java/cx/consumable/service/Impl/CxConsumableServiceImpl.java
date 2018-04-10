@@ -22,4 +22,11 @@ public class CxConsumableServiceImpl implements CxConsumableService {
         return pageList;
     }
 
+    public CxConsumable getDetails(Integer conId) {
+        if(null == conId){
+            return null;
+        }
+        return cxConsumableDao.getDetails(conId);
+    }
+
 }

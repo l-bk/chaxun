@@ -8,4 +8,6 @@ import java.util.List;
 public interface CxConsumableService {
 
     public PageInfo<CxConsumable> findList(CxConsumable cxConsumable, int pageNum, int pageSize);
+
+    public CxConsumable getDetails(Integer conId);
 }

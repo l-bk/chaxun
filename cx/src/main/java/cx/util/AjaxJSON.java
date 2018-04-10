@@ -7,6 +7,7 @@ public class AjaxJSON {
     private Object obj = null;
     private Long total = 0L;
     private Map<String, Object> attributes;
+    private boolean isLastPage = false;
 
     public AjaxJSON() {
     }
@@ -49,5 +50,13 @@ public class AjaxJSON {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
     }
 }

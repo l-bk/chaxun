@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="cx.announcement.dao.CxAnnouncementDao">
+
+    <sql id="selectAll">
+        a.an_id AS "anId",
+        a.an_details AS "anDetails",
+        a.an_status AS  "anStatus",
+        a.create_date AS "createDate"
+    </sql>
+
+    <select id="findList" resultType="cx.announcement.entity.CxAnnouncement">
+        SELECT
+        <include refid="selectAll"/>
+        from cx_announcement_info AS  a
+        WHERE  a.an_status = '1'
+
+    </select>
+</mapper>

@@ -21,23 +21,14 @@
         from cx_consumable_info AS a
         where 1=1
         <if test="conModel != null and conModel != ''">
-            and a.con_model = #{conModel}
+            and a.con_model like  CONCAT('%',#{conModel},'%')
         </if>
         <if test="conCompatible != null and conCompatible !=''">
             and a.con_compatible like CONCAT('%',#{conCompatible},'%')
         </if>
     </select>
 
-   <!-- <select id="selectCount" resultType="java.lang.Integer" parameterType="cx.consumable.entity.CxConsumable">
-        select count(1) from cx_consumable_info AS  a
-        where 1=1
-        <if test="conModel != null and conModel != ''">
-            and a.con_model = #{conModel}
-        </if>
-        <if test="conCompatible != null and conCompatible !=''">
-            and a.con_compatible like CONCAT('%',#{conCompatible},'%')
-        </if>
-    </select>-->
+
 
     <select id="getDetails" resultType="cx.consumable.entity.CxConsumable" parameterType="java.lang.Integer">
         select

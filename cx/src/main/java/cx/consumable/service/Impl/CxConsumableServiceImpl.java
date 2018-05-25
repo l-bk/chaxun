@@ -16,10 +16,8 @@ public class CxConsumableServiceImpl implements CxConsumableService {
     @Resource
     private CxConsumableDao cxConsumableDao;
 
-    public PageInfo<CxConsumable> findList(CxConsumable cxConsumable, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<CxConsumable> pageList = new PageInfo<CxConsumable>(cxConsumableDao.findList(cxConsumable));
-        return pageList;
+    public List<CxConsumable> findList(CxConsumable cxConsumable) {
+           return cxConsumableDao.findList(cxConsumable);
     }
 
     public CxConsumable getDetails(Integer conId) {
@@ -27,6 +25,12 @@ public class CxConsumableServiceImpl implements CxConsumableService {
             return null;
         }
         return cxConsumableDao.getDetails(conId);
+    }
+
+    public PageInfo<CxConsumable> findDistinctList(CxConsumable cxConsumable, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<CxConsumable> pageList = new PageInfo<CxConsumable>(cxConsumableDao.findDistinctList(cxConsumable));
+        return pageList;
     }
 
 }

@@ -10,4 +10,6 @@ public interface CxConsumableDao {
     public List<CxConsumable> findList(CxConsumable cxConsumable);
 
     public CxConsumable getDetails(Integer conId);
+
+    public List<CxConsumable> findDistinctList(CxConsumable cxConsumable);
 }

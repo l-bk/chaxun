@@ -15,9 +15,14 @@
         a.con_reference_price AS "conReferencePrice"
     </sql>
 
-    <select id="findList" resultType="cx.consumable.entity.CxConsumable" parameterType="cx.consumable.entity.CxConsumable">
+    <select id="findDistinctList" resultType="cx.consumable.entity.CxConsumable" parameterType="cx.consumable.entity.CxConsumable">
         select
-        <include refid="selectAll"/>
+        <if test="conModel != null and conModel != ''">
+            DISTINCT (a.con_model) AS conModel
+        </if>
+        <if test="conCompatible != null and conCompatible !=''">
+            DISTINCT (a.con_compatible) AS conCompatible
+        </if>
         from cx_consumable_info AS a
         where 1=1
         <if test="conModel != null and conModel != ''">
@@ -35,7 +40,19 @@
         <include refid="selectAll"/>
         from cx_consumable_info AS a
         where a.con_id = #{conId}
+    </select>
 
+    <select id ="findList"  resultType="cx.consumable.entity.CxConsumable" parameterType="cx.consumable.entity.CxConsumable" >
+        select
+       <include refid="selectAll"/>
+        from cx_consumable_info AS a
+        where 1=1
+        <if test="conModel != null and conModel != ''">
+            and a.con_model = #{conModel}
+        </if>
+        <if test="conCompatible != null and conCompatible !=''">
+            and a.con_compatible = #{conCompatible}
+        </if>
     </select>
 
 </mapper>

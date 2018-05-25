@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CxConsumableService {
 
-    public PageInfo<CxConsumable> findList(CxConsumable cxConsumable, int pageNum, int pageSize);
+    public List<CxConsumable> findList(CxConsumable cxConsumable);
 
     public CxConsumable getDetails(Integer conId);
+
+    public PageInfo<CxConsumable> findDistinctList(CxConsumable cxConsumable, int pageNum, int pageSize);
 }

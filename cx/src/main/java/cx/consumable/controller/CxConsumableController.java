@@ -7,6 +7,8 @@ import cx.util.AjaxJSON;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
@@ -26,7 +28,7 @@ public class CxConsumableController {
             pageNum = pageNum == null?"0":pageNum;
             pageSize= pageSize == null?"0":pageSize;
             CxConsumable cxConsumable =(CxConsumable) JSONObject.toBean(JSONObject.fromObject(json.getObj()),CxConsumable.class);
-            PageInfo<CxConsumable> list=cxConsumableService.findList(cxConsumable,Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            PageInfo<CxConsumable> list=cxConsumableService.findDistinctList(cxConsumable,Integer.valueOf(pageNum),Integer.valueOf(pageSize));
             result.setObj(list.getList());
             result.setTotal(list.getTotal());
             result.setSuccess(true);
@@ -48,14 +50,20 @@ public class CxConsumableController {
         AjaxJSON result = new AjaxJSON();
         try{
             CxConsumable cxConsumable = (CxConsumable)JSONObject.toBean(JSONObject.fromObject(json.getObj()),CxConsumable.class);
-            CxConsumable newCon = cxConsumableService.getDetails(cxConsumable.getConId());
+            List<CxConsumable> list = cxConsumableService.findList(cxConsumable);
+            if(list.size() != 0){
+                result.setObj(list);
+                result.setTotal((long)list.size());
+            }else{
+                result.setMsg("查询不到对应信息");
+            }
             result.setSuccess(true);
-            result.setObj(newCon);
         }catch(Exception e){
             result.setSuccess(false);
             result.setMsg("查询失败");
         }
         return  result;
-
     }
+
+
 }
